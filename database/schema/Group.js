@@ -44,12 +44,12 @@ module.exports.createGroupResolver = function (database, Operation, withFilter, 
             [Operation.eq]: args.chatId
           }
         }
-        return await database.models.Groups.findAll({ where: filter });
+        return await database.models.Group.findAll({ where: filter });
       }
     },
     Mutation: {
       insertGroup: async(root, args, context, info) => {
-        let group = await database.models.Groups.create(args);
+        let group = await database.models.Group.create(args);
         pubsub.publish(GROUP_CHANGE, { 
           chatId: args.chatId,
           group: group.dataValues
@@ -58,7 +58,7 @@ module.exports.createGroupResolver = function (database, Operation, withFilter, 
       },
       updateGroup: async(root, args, context, info) => {
         const filter = { where: { chatId: args.chatId } }
-        await database.models.Groups.update(args, filter)
+        await database.models.Group.update(args, filter)
           .then(() => {
             pubsub.publish(GROUP_CHANGE, {
               chatId: args.chatId,
