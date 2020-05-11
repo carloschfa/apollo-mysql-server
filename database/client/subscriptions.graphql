@@ -20,29 +20,29 @@ subscription Blocked($blockedId: String, $blockerId: String) {
 }
 
 ## Detail
-subscription Detail($chatIds: [String]!) {
-  object: detail(chatIds: $chatIds) {
+subscription Detail($chatId: String!) {
+  object: detail(chatId: $chatId) {
     objectId, chatId, userId, typing, lastRead, mutedUntil, isDeleted, isArchived, createdAt, updatedAt
   }
 }
 
 ## Group
-subscription Group($chatIds: [String]!) {
-  object: group(chatIds: $chatIds) {
+subscription Group($chatId: String!) {
+  object: group(chatId: $chatId) {
     objectId, chatId, name, ownerId, isDeleted, createdAt, updatedAt
   }
 }
 
 ## Member
-subscription Member($chatIds: [String]!) {
-  object: member(chatIds: $chatIds) {
+subscription Member($chatId: String!) {
+  object: member(chatId: $chatId) {
     objectId, chatId, userId, isActive, createdAt, updatedAt
   }
 }
 
 ## Message
-subscription Message($chatIds: [String]!, $updatedAt: Int!) {
-  object: message(chatIds: $chatIds, updatedAt: $updatedAt) {
+subscription Message($chatId: String!, $updatedAt: Int!) {
+  object: message(chatId: $chatId, updatedAt: $updatedAt) {
     objectId, chatId, userId, userFullname, userInitials, userPictureAt, type, text, photoWidth, photoHeight, videoDuration, audioDuration, latitude, longitude, isMediaQueued, isMediaFailed, isDeleted, createdAt, updatedAt
   }
 }

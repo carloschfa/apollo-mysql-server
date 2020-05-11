@@ -20,29 +20,29 @@ query Blockeds($blockedId: String, $blockerId: String) {
 }
 
 ## Detail
-query Details($chatIds: [String]!) {
-  objects: details(chatIds: $chatIds) {
+query Details($chatId: String!) {
+  objects: details(chatId: $chatId) {
     objectId, chatId, userId, typing, lastRead, mutedUntil, isDeleted, isArchived, createdAt, updatedAt
   }
 }
 
 ## Group
-query Groups($chatIds: [String]!) {
-  objects: groups(chatIds: $chatIds) {
+query Groups($chatId: String!) {
+  objects: groups(chatId: $chatId) {
     objectId, chatId, name, ownerId, isDeleted, createdAt, updatedAt
   }
 }
 
 ## Member
-query Members($chatIds: [String], $userIds: [String] ) {
-  objects: members(chatIds: $chatIds, userIds: $userIds) {
+query Members($chatId: String, $userIds: [String] ) {
+  objects: members(chatId: $chatId, userIds: $userIds) {
     objectId, chatId, userId, isActive, createdAt, updatedAt
   }
 }
 
 ## Message
-query Messages($chatIds: [String]!, $updatedAt: Int!) {
-  objects: messages(chatIds: $chatIds, updatedAt: $updatedAt) {
+query Messages($chatId: String!, $updatedAt: Int!) {
+  objects: messages(chatId: $chatId, updatedAt: $updatedAt) {
     objectId, chatId, userId, userFullname, userInitials, userPictureAt, type, text, photoWidth, photoHeight, videoDuration, audioDuration, latitude, longitude, isMediaQueued, isMediaFailed, isDeleted, createdAt, updatedAt
   }
 }

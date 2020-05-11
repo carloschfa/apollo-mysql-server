@@ -23,11 +23,11 @@ module.exports.createMessageSchema = function (gql) {
     }
 
     extend type Subscription {
-      message(chatIds: [String]!, updatedAt: Int!): Message!
+      message(chatId: String!, updatedAt: Int!): Message!
     }
 
     extend type Query {
-      messages(chatIds: [String]!, updatedAt: Int!): [Message]
+      messages(chatId: String!, updatedAt: Int!): [Message]
     }
 
     extend type Mutation {
@@ -45,7 +45,7 @@ module.exports.createMessageResolver = function (database, Operation, withFilter
       message: {
         subscribe: withFilter(
           () => pubsub.asyncIterator(MESSAGE_CHANGE),
-          (payload, args) => (args.chatIds.indexOf(payload.chatId) > -1) && (payload.updatedAt > args.updatedAt)
+          (payload, args) => (args.chatId == payload.chatId) && (payload.updatedAt > args.updatedAt)
         )
       }
     },
@@ -53,7 +53,7 @@ module.exports.createMessageResolver = function (database, Operation, withFilter
       messages: async(root, args) => {
         const filter = { 
           chatId: { 
-            [Operation.in]: args.chatIds
+            [Operation.eq]: args.chatId
           },
           updatedAt: {
             [Operation.gt]: args.updatedAt

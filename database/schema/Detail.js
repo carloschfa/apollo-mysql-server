@@ -14,11 +14,11 @@ module.exports.createDetailSchema = function (gql) {
     }
 
     extend type Subscription {
-      detail(chatIds: [String]!): Detail!
+      detail(chatId: String!): Detail!
     }
 
     extend type Query {
-      details(chatIds: [String]!): [Detail]
+      details(chatId: String!): Detail
     }
 
     extend type Mutation {
@@ -36,7 +36,7 @@ module.exports.createDetailResolver = function (database, Operation, withFilter,
       detail: {
         subscribe: withFilter(
           () => pubsub.asyncIterator(DETAIL_CHANGE),
-          (payload, args) => args.chatIds.indexOf(payload.chatId) > -1
+          (payload, args) => args.chatId == payload.chatId
         )
       }
     },
@@ -44,7 +44,7 @@ module.exports.createDetailResolver = function (database, Operation, withFilter,
       details: async(root, args) => {
         let filter = { 
           chatId: { 
-            [Operation.in]: args.chatIds
+            [Operation.eq]: args.chatId
           }
         }
         let details = await database.models.Detail.findAll({ where: filter });

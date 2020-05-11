@@ -11,11 +11,11 @@ module.exports.createGroupSchema = function (gql) {
     }
 
     extend type Subscription {
-      group(chatIds: [String]!): Group!
+      group(chatId: String!): Group!
     }
 
     extend type Query {
-      groups(chatIds: [String]!): [Group]
+      groups(chatId: String!): [Group]
     }
 
     extend type Mutation {
@@ -33,7 +33,7 @@ module.exports.createGroupResolver = function (database, Operation, withFilter, 
       group: {
         subscribe: withFilter(
           () => pubsub.asyncIterator(GROUP_CHANGE),
-          (payload, args) => args.chatIds.indexOf(payload.chatId) > -1
+          (payload, args) => args.chatId == payload.chatId
         )
       }
     },
@@ -41,10 +41,9 @@ module.exports.createGroupResolver = function (database, Operation, withFilter, 
       groups: async(root, args) => {
         let filter = { 
           chatId: { 
-            [Operation.in]: args.chatIds
+            [Operation.eq]: args.chatId
           }
         }
-        console.log(database.models)
         return await database.models.Groups_.findAll({ where: filter });
       }
     },
