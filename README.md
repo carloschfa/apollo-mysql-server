@@ -20,12 +20,12 @@ Node.js server with Apollo GraphQL and MySQL.
 
 13. Sign-in to your droplet via terminal using root user.
 14. Create a folder called Server using<br>`mkdir Server`
-15. Enter the folder called Server using<br>`cd Server`
+15. Enter the recently created folder with<br>`cd Server`
 16. Install Node.js and Git using<br>`yum install -y nodejs git`
 17. Clone the following GitHub repo using<br>`git clone https://github.com/carloschfa/apollo-mysql-server`
 18. Enter the cloned repo folder with<br>`cd apollo-mysql-server`
 
-## MySQL Database Installation and Configuration
+## MySQL Installation and Configuration
 
 19. Start the MySQL installation with<br>`rpm -Uvh https://repo.mysql.com/mysql80-community-release-el7-3.noarch.rpm`
 20. Finish the MySQL installation with<br>`yum install -y mysql-server`
@@ -39,14 +39,18 @@ Node.js server with Apollo GraphQL and MySQL.
 - Remove test database and access to it? - `Yes`
 - Reload privilege tables now? - `Yes`
 
-24. Enter MySQL console using<br>`mysql -u root -p < database/CreateDatabase.sql`
-25. Enter the MySQL password provided recently<br>`Related123`
+## MySQL Database and User Configuration
 
-## Server Configuration
+24. To customize the MySQL database and MySQL user account details make changes in the following files:
+- `database/CreateDatabase.sql`
+- `database/CreateUser.sql`
+- `.env`
 
-26. Edit the environment variables using<br> `vi .env`
-27. Type `i` to enter in the INSERT mode of vi editor and change the values after the equals `=` to yours.
-28. Type `CTRL + C` to exit the INSERT mode and `:wq!` to save the changes and exit the vi editor.
+25. Enter MySQL console using<br>`mysql -u root -p`
+26. Enter the MySQL password provided recently<br>`Related123`
+27. Create the MySQL database using<br>`SOURCE database/CreateDatabase.sql;`
+28. Create the MySQL user account using<br>`SOURCE database/CreateUser.sql;`
+29. Exit MySQL console using<br>`EXIT;`
 
 ## Server Installation
 
