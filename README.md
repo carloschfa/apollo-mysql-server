@@ -19,19 +19,20 @@ Node.js server with Apollo GraphQL and MySQL.
 12. Click on Create Firewall.
 
 13. Sign-in to your droplet via terminal using root user.
-14. Create a folder called Server using<br>`mkdir Server`
-15. Enter the recently created folder with<br>`cd Server`
-16. Install Node.js and Git using<br>`yum install -y nodejs git`
-17. Clone the following GitHub repo using<br>`git clone https://github.com/carloschfa/apollo-mysql-server`
-18. Enter the cloned repo folder with<br>`cd apollo-mysql-server`
+14. Install Node.js using<br>`yum install -y nodejs`
+15. Install Git using<br>`yum install -y git`
+16. Create a folder called Server using<br>`mkdir Server`
+17. Enter the recently created folder with<br>`cd Server`
+18. Clone the following GitHub repo using<br>`git clone https://github.com/carloschfa/apollo-mysql-server`
+19. Enter the cloned repo folder with<br>`cd apollo-mysql-server`
 
 ## MySQL Installation and Configuration
 
-19. Start the MySQL installation with<br>`rpm -Uvh https://repo.mysql.com/mysql80-community-release-el7-3.noarch.rpm`
-20. Finish the MySQL installation with<br>`yum install -y mysql-server`
-21. Start the MySQL Service using<br>`service mysqld start`
-22. Configure MySQL using<br>`mysql_secure_installation`
-23. Answer the following questions as described below.<br>
+20. Start the MySQL installation with<br>`rpm -Uvh https://repo.mysql.com/mysql80-community-release-el7-3.noarch.rpm`
+21. Finish the MySQL installation with<br>`yum install -y mysql-server`
+22. Start the MySQL Service using<br>`service mysqld start`
+23. Configure MySQL using<br>`mysql_secure_installation`
+24. Answer the following questions as described below.<br>
 - Would you like to setup VALIDATE PASSWORD component? - `No`
 - Please set the password for root here. New password: - `Related123`
 - Remove anonymous users? - `Yes`
@@ -41,24 +42,23 @@ Node.js server with Apollo GraphQL and MySQL.
 
 ## MySQL Database and User Configuration
 
-24. To customize the MySQL database and MySQL user account details make changes in the following files:
+25. To customize your MySQL database and MySQL user account details make changes in the following files:
 - `database/CreateDatabase.sql`
 - `database/CreateUser.sql`
 - `.env`
 
-25. Enter MySQL console using<br>`mysql -u root -p`
-26. Enter the MySQL password provided recently<br>`Related123`
-27. Create the MySQL database using<br>`SOURCE database/CreateDatabase.sql;`
-28. Create the MySQL user account using<br>`SOURCE database/CreateUser.sql;`
-29. Exit MySQL console using<br>`EXIT;`
+26. Enter MySQL console using<br>`mysql -u root -p`
+27. Enter the MySQL password provided recently<br>`Related123`
+28. Create the MySQL database using<br>`SOURCE database/CreateDatabase.sql;`
+29. Create the MySQL user account using<br>`SOURCE database/CreateUser.sql;`
+30. Exit MySQL console using<br>`EXIT;`
 
 ## Server Installation
 
-29. Install the predefined packages using<br>`npm install`
-30. Install PM2 using<br>`npm install pm2 -g`
-31. Start the Apollo server with<br>`pm2 start index.js`
-
-32. You can exit from the droplet using<br>`exit`
+31. Install the predefined packages using<br>`npm install`
+32. Install PM2 using<br>`npm install pm2 -g`
+33. Start the Apollo server with<br>`pm2 start index.js`
+34. You can exit from the droplet using<br>`exit`
 
 ## Apollo GraphQL admin page
 
