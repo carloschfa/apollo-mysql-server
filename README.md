@@ -39,7 +39,7 @@ Node.js server with Apollo GraphQL and MySQL.
 - Remove test database and access to it? - `Yes`
 - Reload privilege tables now? - `Yes`
 
-24. Enter MySQL console using<br>`mysql -u root -p < database/DatabaseCreationScript.sql`
+24. Enter MySQL console using<br>`mysql -u root -p < database/CreateDatabase.sql`
 25. Enter the MySQL password provided recently<br>`Related123`
 
 ## Server Configuration
