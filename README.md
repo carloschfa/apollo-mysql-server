@@ -4,17 +4,17 @@ Node.js server with Apollo GraphQL and MySQL.
 
 ## DigitalOcean Droplet Installation
 
-1. Sign in in to your DigitalOcean account.
+1. Sign in to your DigitalOcean account.
 2. Select Create -> Droplet for creating a new droplet.
-3. From Distributions list please select CentOS.
+3. From the Distributions list please select CentOS.
 4. Choose the plan and the datacenter region that meet your requirements.
-5. Also please alter the remaining options regarding to your needs.
+5. Also please alter the remaining options regarding your needs.
 6. Click on Create Droplet.
 
 ## DigitalOcean Firewall Configuration
 
 7. Select Networking -> Firewalls -> Create Firewall.
-8. Set a name to your new Firewall.
+8. Set a name for your new Firewall.
 9. Add a Custom inbound rule with the TCP protocol using the port number 3001.
 10. Add a MySQL inbound rule with the TCP protocol using the port number 3306.
 11. Scroll down to the bottom of the page and apply the Firewall to the recently created droplet.
@@ -22,11 +22,11 @@ Node.js server with Apollo GraphQL and MySQL.
 
 ## Droplet Setup
 
-13. Sign in to your droplet via terminal using root user.
+13. Sign in to your droplet via terminal with root user.
 14. Install Node.js using<br>`yum install -y nodejs`
 15. Install MySQL using<br>`yum install -y mysql-server`
 16. Install Git using<br>`yum install -y git`
-17. Clone the following GitHub repo using<br>`git clone https://github.com/carloschfa/apollo-mysql-server`
+17. Clone the following GitHub repo using<br>`git clone https://github.com/relatedcode/apollo-mysql-server`
 18. Enter the cloned repo folder with<br>`cd apollo-mysql-server`
 
 ## MySQL Configuration
@@ -54,7 +54,7 @@ Node.js server with Apollo GraphQL and MySQL.
 26. Create the MySQL user account using<br>`SOURCE database/CreateUser.sql;`
 27. Exit MySQL console using<br>`EXIT;`
 
-## Server Installation
+## Apollo Server Installation
 
 28. Install the predefined packages using<br>`npm install`
 29. Install PM2 using<br>`npm install pm2 -g`
@@ -63,7 +63,7 @@ Node.js server with Apollo GraphQL and MySQL.
 
 ## Apollo GraphQL admin page
 
-You can check the Apollo GraphQL admin page from your browser entering the server ip address with the port number (like this: http://your-server-ip-address:3001).
+You can check the Apollo GraphQL admin page from your browser entering the server IP address with the port number (like this: http://your-server-ip-address:3001).
 
 ## Remote Database Access
 
