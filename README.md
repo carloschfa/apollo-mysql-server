@@ -4,7 +4,7 @@ Node.js server with Apollo GraphQL and MySQL.
 
 ## DigitalOcean Droplet Installation
 
-1. Sign-in in to your DigitalOcean account.
+1. Sign in in to your DigitalOcean account.
 2. Select Create -> Droplet for creating a new droplet.
 3. From Distributions list please select CentOS.
 4. Choose the plan and the datacenter region that meet your requirements.
@@ -22,7 +22,7 @@ Node.js server with Apollo GraphQL and MySQL.
 
 ## Droplet Setup
 
-13. Sign-in to your droplet via terminal using root user.
+13. Sign in to your droplet via terminal using root user.
 14. Install Node.js using<br>`yum install -y nodejs`
 15. Install MySQL using<br>`yum install -y mysql-server`
 16. Install Git using<br>`yum install -y git`
