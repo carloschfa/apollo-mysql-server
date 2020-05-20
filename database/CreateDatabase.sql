@@ -80,6 +80,7 @@ CREATE TABLE `Message` (
 );
 CREATE TABLE `Person` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `objectId` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `phone` varchar(255) NOT NULL,
   `firstname` varchar(255) NOT NULL,

@@ -8,7 +8,7 @@ subscription Friend($userId: String!) {
 ## Person
 subscription Person($updatedAt: Int!) {
   object: person(updatedAt: $updatedAt) {
-    email, phone, firstname, lastname, fullname, country, location, pictureAt, status, keepMedia, networkPhoto, networkVideo, networkAudio, wallpaper, loginMethod, oneSignalId, lastActive, lastTerminate, createdAt, updatedAt
+    objectId, email, phone, firstname, lastname, fullname, country, location, pictureAt, status, keepMedia, networkPhoto, networkVideo, networkAudio, wallpaper, loginMethod, oneSignalId, lastActive, lastTerminate, createdAt, updatedAt
   }
 }
 

@@ -1,6 +1,7 @@
 module.exports.createPersonSchema = function (gql) {
   return PersonSchema = gql`
     type Person {
+      objectId: String!
       email: String!
       phone: String!
       firstname: String!
@@ -28,12 +29,12 @@ module.exports.createPersonSchema = function (gql) {
     }
 
     extend type Query {
-      people(updatedAt: Int!): [Person]
+      persons(updatedAt: Int!): [Person]
     }
 
     extend type Mutation {
-      insertPerson(email: String!, phone: String!, firstname: String!, lastname: String!, fullname: String!, country: String!, location: String!, pictureAt: Int!, status: String!, keepMedia: Int!, networkPhoto: Int!, networkVideo: Int!, networkAudio: Int!, wallpaper: String!, loginMethod: String!, oneSignalId: String!, lastActive: Int!, lastTerminate: Int!, createdAt: Int!, updatedAt: Int!): Person!
-      updatePerson(email: String!, phone: String!, firstname: String!, lastname: String!, fullname: String!, country: String!, location: String!, pictureAt: Int!, status: String!, keepMedia: Int!, networkPhoto: Int!, networkVideo: Int!, networkAudio: Int!, wallpaper: String!, loginMethod: String!, oneSignalId: String!, lastActive: Int!, lastTerminate: Int!, createdAt: Int!, updatedAt: Int!): Person!
+      insertPerson(objectId: String!, email: String!, phone: String!, firstname: String!, lastname: String!, fullname: String!, country: String!, location: String!, pictureAt: Int!, status: String!, keepMedia: Int!, networkPhoto: Int!, networkVideo: Int!, networkAudio: Int!, wallpaper: String!, loginMethod: String!, oneSignalId: String!, lastActive: Int!, lastTerminate: Int!, createdAt: Int!, updatedAt: Int!): Person!
+      updatePerson(objectId: String!, email: String!, phone: String!, firstname: String!, lastname: String!, fullname: String!, country: String!, location: String!, pictureAt: Int!, status: String!, keepMedia: Int!, networkPhoto: Int!, networkVideo: Int!, networkAudio: Int!, wallpaper: String!, loginMethod: String!, oneSignalId: String!, lastActive: Int!, lastTerminate: Int!, createdAt: Int!, updatedAt: Int!): Person!
     }
   `
 }
@@ -52,7 +53,7 @@ module.exports.createPersonResolver = function (database, Operation, withFilter,
       }
     },
     Query: {
-      people: async(root, args) => {
+      persons: async(root, args) => {
         let filter = { 
           updatedAt: { 
             [Operation.gt]: args.updatedAt
