@@ -6,9 +6,9 @@ query Friends($userId: String!) {
 }
 
 ## Person
-query People($updatedAt: Int!) {
-  objects: people(updatedAt: $updatedAt) {
-    email, phone, firstname, lastname, fullname, country, location, pictureAt, status, keepMedia, networkPhoto, networkVideo, networkAudio, wallpaper, loginMethod, oneSignalId, lastActive, lastTerminate, createdAt, updatedAt
+query Persons($updatedAt: Int!) {
+  objects: persons(updatedAt: $updatedAt) {
+    objectId, email, phone, firstname, lastname, fullname, country, location, pictureAt, status, keepMedia, networkPhoto, networkVideo, networkAudio, wallpaper, loginMethod, oneSignalId, lastActive, lastTerminate, createdAt, updatedAt
   }  
 }
 

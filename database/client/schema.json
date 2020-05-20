@@ -47,7 +47,7 @@
             "deprecationReason": null
           },
           {
-            "name": "people",
+            "name": "persons",
             "description": "",
             "args": [
               {
@@ -447,6 +447,22 @@
         "name": "Person",
         "description": "",
         "fields": [
+          {
+            "name": "objectId",
+            "description": "",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "email",
             "description": "",
@@ -2021,6 +2037,20 @@
             "description": "",
             "args": [
               {
+                "name": "objectId",
+                "description": "",
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              },
+              {
                 "name": "email",
                 "description": "",
                 "type": {
@@ -2317,6 +2347,20 @@
             "name": "updatePerson",
             "description": "",
             "args": [
+              {
+                "name": "objectId",
+                "description": "",
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              },
               {
                 "name": "email",
                 "description": "",

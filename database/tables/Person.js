@@ -1,5 +1,9 @@
 module.exports.createPerson = function (database, Sequelize) {
   database.define('Person', {
+    objectId: {
+      type: Sequelize.STRING,
+      allowNull: false
+    },
     email: {
       type: Sequelize.STRING,
       allowNull: false

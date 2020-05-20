@@ -316,9 +316,10 @@ public final class InsertPersonMutation: GraphQLMutation {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    mutation InsertPerson($email: String!, $phone: String!, $firstname: String!, $lastname: String!, $fullname: String!, $country: String!, $location: String!, $pictureAt: Int!, $status: String!, $keepMedia: Int!, $networkPhoto: Int!, $networkVideo: Int!, $networkAudio: Int!, $wallpaper: String!, $loginMethod: String!, $oneSignalId: String!, $lastActive: Int!, $lastTerminate: Int!, $createdAt: Int!, $updatedAt: Int!) {
-      insertPerson(email: $email, phone: $phone, firstname: $firstname, lastname: $lastname, fullname: $fullname, country: $country, location: $location, pictureAt: $pictureAt, status: $status, keepMedia: $keepMedia, networkPhoto: $networkPhoto, networkVideo: $networkVideo, networkAudio: $networkAudio, wallpaper: $wallpaper, loginMethod: $loginMethod, oneSignalId: $oneSignalId, lastActive: $lastActive, lastTerminate: $lastTerminate, createdAt: $createdAt, updatedAt: $updatedAt) {
+    mutation InsertPerson($objectId: String!, $email: String!, $phone: String!, $firstname: String!, $lastname: String!, $fullname: String!, $country: String!, $location: String!, $pictureAt: Int!, $status: String!, $keepMedia: Int!, $networkPhoto: Int!, $networkVideo: Int!, $networkAudio: Int!, $wallpaper: String!, $loginMethod: String!, $oneSignalId: String!, $lastActive: Int!, $lastTerminate: Int!, $createdAt: Int!, $updatedAt: Int!) {
+      insertPerson(objectId: $objectId, email: $email, phone: $phone, firstname: $firstname, lastname: $lastname, fullname: $fullname, country: $country, location: $location, pictureAt: $pictureAt, status: $status, keepMedia: $keepMedia, networkPhoto: $networkPhoto, networkVideo: $networkVideo, networkAudio: $networkAudio, wallpaper: $wallpaper, loginMethod: $loginMethod, oneSignalId: $oneSignalId, lastActive: $lastActive, lastTerminate: $lastTerminate, createdAt: $createdAt, updatedAt: $updatedAt) {
         __typename
+        objectId
         email
         phone
         firstname
@@ -345,6 +346,7 @@ public final class InsertPersonMutation: GraphQLMutation {
 
   public let operationName: String = "InsertPerson"
 
+  public var objectId: String
   public var email: String
   public var phone: String
   public var firstname: String
@@ -366,7 +368,8 @@ public final class InsertPersonMutation: GraphQLMutation {
   public var createdAt: Int
   public var updatedAt: Int
 
-  public init(email: String, phone: String, firstname: String, lastname: String, fullname: String, country: String, location: String, pictureAt: Int, status: String, keepMedia: Int, networkPhoto: Int, networkVideo: Int, networkAudio: Int, wallpaper: String, loginMethod: String, oneSignalId: String, lastActive: Int, lastTerminate: Int, createdAt: Int, updatedAt: Int) {
+  public init(objectId: String, email: String, phone: String, firstname: String, lastname: String, fullname: String, country: String, location: String, pictureAt: Int, status: String, keepMedia: Int, networkPhoto: Int, networkVideo: Int, networkAudio: Int, wallpaper: String, loginMethod: String, oneSignalId: String, lastActive: Int, lastTerminate: Int, createdAt: Int, updatedAt: Int) {
+    self.objectId = objectId
     self.email = email
     self.phone = phone
     self.firstname = firstname
@@ -390,14 +393,14 @@ public final class InsertPersonMutation: GraphQLMutation {
   }
 
   public var variables: GraphQLMap? {
-    return ["email": email, "phone": phone, "firstname": firstname, "lastname": lastname, "fullname": fullname, "country": country, "location": location, "pictureAt": pictureAt, "status": status, "keepMedia": keepMedia, "networkPhoto": networkPhoto, "networkVideo": networkVideo, "networkAudio": networkAudio, "wallpaper": wallpaper, "loginMethod": loginMethod, "oneSignalId": oneSignalId, "lastActive": lastActive, "lastTerminate": lastTerminate, "createdAt": createdAt, "updatedAt": updatedAt]
+    return ["objectId": objectId, "email": email, "phone": phone, "firstname": firstname, "lastname": lastname, "fullname": fullname, "country": country, "location": location, "pictureAt": pictureAt, "status": status, "keepMedia": keepMedia, "networkPhoto": networkPhoto, "networkVideo": networkVideo, "networkAudio": networkAudio, "wallpaper": wallpaper, "loginMethod": loginMethod, "oneSignalId": oneSignalId, "lastActive": lastActive, "lastTerminate": lastTerminate, "createdAt": createdAt, "updatedAt": updatedAt]
   }
 
   public struct Data: GraphQLSelectionSet {
     public static let possibleTypes: [String] = ["Mutation"]
 
     public static let selections: [GraphQLSelection] = [
-      GraphQLField("insertPerson", arguments: ["email": GraphQLVariable("email"), "phone": GraphQLVariable("phone"), "firstname": GraphQLVariable("firstname"), "lastname": GraphQLVariable("lastname"), "fullname": GraphQLVariable("fullname"), "country": GraphQLVariable("country"), "location": GraphQLVariable("location"), "pictureAt": GraphQLVariable("pictureAt"), "status": GraphQLVariable("status"), "keepMedia": GraphQLVariable("keepMedia"), "networkPhoto": GraphQLVariable("networkPhoto"), "networkVideo": GraphQLVariable("networkVideo"), "networkAudio": GraphQLVariable("networkAudio"), "wallpaper": GraphQLVariable("wallpaper"), "loginMethod": GraphQLVariable("loginMethod"), "oneSignalId": GraphQLVariable("oneSignalId"), "lastActive": GraphQLVariable("lastActive"), "lastTerminate": GraphQLVariable("lastTerminate"), "createdAt": GraphQLVariable("createdAt"), "updatedAt": GraphQLVariable("updatedAt")], type: .nonNull(.object(InsertPerson.selections))),
+      GraphQLField("insertPerson", arguments: ["objectId": GraphQLVariable("objectId"), "email": GraphQLVariable("email"), "phone": GraphQLVariable("phone"), "firstname": GraphQLVariable("firstname"), "lastname": GraphQLVariable("lastname"), "fullname": GraphQLVariable("fullname"), "country": GraphQLVariable("country"), "location": GraphQLVariable("location"), "pictureAt": GraphQLVariable("pictureAt"), "status": GraphQLVariable("status"), "keepMedia": GraphQLVariable("keepMedia"), "networkPhoto": GraphQLVariable("networkPhoto"), "networkVideo": GraphQLVariable("networkVideo"), "networkAudio": GraphQLVariable("networkAudio"), "wallpaper": GraphQLVariable("wallpaper"), "loginMethod": GraphQLVariable("loginMethod"), "oneSignalId": GraphQLVariable("oneSignalId"), "lastActive": GraphQLVariable("lastActive"), "lastTerminate": GraphQLVariable("lastTerminate"), "createdAt": GraphQLVariable("createdAt"), "updatedAt": GraphQLVariable("updatedAt")], type: .nonNull(.object(InsertPerson.selections))),
     ]
 
     public private(set) var resultMap: ResultMap
@@ -424,6 +427,7 @@ public final class InsertPersonMutation: GraphQLMutation {
 
       public static let selections: [GraphQLSelection] = [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("objectId", type: .nonNull(.scalar(String.self))),
         GraphQLField("email", type: .nonNull(.scalar(String.self))),
         GraphQLField("phone", type: .nonNull(.scalar(String.self))),
         GraphQLField("firstname", type: .nonNull(.scalar(String.self))),
@@ -452,8 +456,8 @@ public final class InsertPersonMutation: GraphQLMutation {
         self.resultMap = unsafeResultMap
       }
 
-      public init(email: String, phone: String, firstname: String, lastname: String, fullname: String, country: String, location: String, pictureAt: Int, status: String, keepMedia: Int, networkPhoto: Int, networkVideo: Int, networkAudio: Int, wallpaper: String, loginMethod: String, oneSignalId: String, lastActive: Int, lastTerminate: Int, createdAt: Int, updatedAt: Int) {
-        self.init(unsafeResultMap: ["__typename": "Person", "email": email, "phone": phone, "firstname": firstname, "lastname": lastname, "fullname": fullname, "country": country, "location": location, "pictureAt": pictureAt, "status": status, "keepMedia": keepMedia, "networkPhoto": networkPhoto, "networkVideo": networkVideo, "networkAudio": networkAudio, "wallpaper": wallpaper, "loginMethod": loginMethod, "oneSignalId": oneSignalId, "lastActive": lastActive, "lastTerminate": lastTerminate, "createdAt": createdAt, "updatedAt": updatedAt])
+      public init(objectId: String, email: String, phone: String, firstname: String, lastname: String, fullname: String, country: String, location: String, pictureAt: Int, status: String, keepMedia: Int, networkPhoto: Int, networkVideo: Int, networkAudio: Int, wallpaper: String, loginMethod: String, oneSignalId: String, lastActive: Int, lastTerminate: Int, createdAt: Int, updatedAt: Int) {
+        self.init(unsafeResultMap: ["__typename": "Person", "objectId": objectId, "email": email, "phone": phone, "firstname": firstname, "lastname": lastname, "fullname": fullname, "country": country, "location": location, "pictureAt": pictureAt, "status": status, "keepMedia": keepMedia, "networkPhoto": networkPhoto, "networkVideo": networkVideo, "networkAudio": networkAudio, "wallpaper": wallpaper, "loginMethod": loginMethod, "oneSignalId": oneSignalId, "lastActive": lastActive, "lastTerminate": lastTerminate, "createdAt": createdAt, "updatedAt": updatedAt])
       }
 
       public var __typename: String {
@@ -462,6 +466,15 @@ public final class InsertPersonMutation: GraphQLMutation {
         }
         set {
           resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var objectId: String {
+        get {
+          return resultMap["objectId"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "objectId")
         }
       }
 
@@ -652,9 +665,10 @@ public final class UpdatePersonMutation: GraphQLMutation {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    mutation UpdatePerson($email: String!, $phone: String!, $firstname: String!, $lastname: String!, $fullname: String!, $country: String!, $location: String!, $pictureAt: Int!, $status: String!, $keepMedia: Int!, $networkPhoto: Int!, $networkVideo: Int!, $networkAudio: Int!, $wallpaper: String!, $loginMethod: String!, $oneSignalId: String!, $lastActive: Int!, $lastTerminate: Int!, $createdAt: Int!, $updatedAt: Int!) {
-      updatePerson(email: $email, phone: $phone, firstname: $firstname, lastname: $lastname, fullname: $fullname, country: $country, location: $location, pictureAt: $pictureAt, status: $status, keepMedia: $keepMedia, networkPhoto: $networkPhoto, networkVideo: $networkVideo, networkAudio: $networkAudio, wallpaper: $wallpaper, loginMethod: $loginMethod, oneSignalId: $oneSignalId, lastActive: $lastActive, lastTerminate: $lastTerminate, createdAt: $createdAt, updatedAt: $updatedAt) {
+    mutation UpdatePerson($objectId: String!, $email: String!, $phone: String!, $firstname: String!, $lastname: String!, $fullname: String!, $country: String!, $location: String!, $pictureAt: Int!, $status: String!, $keepMedia: Int!, $networkPhoto: Int!, $networkVideo: Int!, $networkAudio: Int!, $wallpaper: String!, $loginMethod: String!, $oneSignalId: String!, $lastActive: Int!, $lastTerminate: Int!, $createdAt: Int!, $updatedAt: Int!) {
+      updatePerson(objectId: $objectId, email: $email, phone: $phone, firstname: $firstname, lastname: $lastname, fullname: $fullname, country: $country, location: $location, pictureAt: $pictureAt, status: $status, keepMedia: $keepMedia, networkPhoto: $networkPhoto, networkVideo: $networkVideo, networkAudio: $networkAudio, wallpaper: $wallpaper, loginMethod: $loginMethod, oneSignalId: $oneSignalId, lastActive: $lastActive, lastTerminate: $lastTerminate, createdAt: $createdAt, updatedAt: $updatedAt) {
         __typename
+        objectId
         email
         phone
         firstname
@@ -681,6 +695,7 @@ public final class UpdatePersonMutation: GraphQLMutation {
 
   public let operationName: String = "UpdatePerson"
 
+  public var objectId: String
   public var email: String
   public var phone: String
   public var firstname: String
@@ -702,7 +717,8 @@ public final class UpdatePersonMutation: GraphQLMutation {
   public var createdAt: Int
   public var updatedAt: Int
 
-  public init(email: String, phone: String, firstname: String, lastname: String, fullname: String, country: String, location: String, pictureAt: Int, status: String, keepMedia: Int, networkPhoto: Int, networkVideo: Int, networkAudio: Int, wallpaper: String, loginMethod: String, oneSignalId: String, lastActive: Int, lastTerminate: Int, createdAt: Int, updatedAt: Int) {
+  public init(objectId: String, email: String, phone: String, firstname: String, lastname: String, fullname: String, country: String, location: String, pictureAt: Int, status: String, keepMedia: Int, networkPhoto: Int, networkVideo: Int, networkAudio: Int, wallpaper: String, loginMethod: String, oneSignalId: String, lastActive: Int, lastTerminate: Int, createdAt: Int, updatedAt: Int) {
+    self.objectId = objectId
     self.email = email
     self.phone = phone
     self.firstname = firstname
@@ -726,14 +742,14 @@ public final class UpdatePersonMutation: GraphQLMutation {
   }
 
   public var variables: GraphQLMap? {
-    return ["email": email, "phone": phone, "firstname": firstname, "lastname": lastname, "fullname": fullname, "country": country, "location": location, "pictureAt": pictureAt, "status": status, "keepMedia": keepMedia, "networkPhoto": networkPhoto, "networkVideo": networkVideo, "networkAudio": networkAudio, "wallpaper": wallpaper, "loginMethod": loginMethod, "oneSignalId": oneSignalId, "lastActive": lastActive, "lastTerminate": lastTerminate, "createdAt": createdAt, "updatedAt": updatedAt]
+    return ["objectId": objectId, "email": email, "phone": phone, "firstname": firstname, "lastname": lastname, "fullname": fullname, "country": country, "location": location, "pictureAt": pictureAt, "status": status, "keepMedia": keepMedia, "networkPhoto": networkPhoto, "networkVideo": networkVideo, "networkAudio": networkAudio, "wallpaper": wallpaper, "loginMethod": loginMethod, "oneSignalId": oneSignalId, "lastActive": lastActive, "lastTerminate": lastTerminate, "createdAt": createdAt, "updatedAt": updatedAt]
   }
 
   public struct Data: GraphQLSelectionSet {
     public static let possibleTypes: [String] = ["Mutation"]
 
     public static let selections: [GraphQLSelection] = [
-      GraphQLField("updatePerson", arguments: ["email": GraphQLVariable("email"), "phone": GraphQLVariable("phone"), "firstname": GraphQLVariable("firstname"), "lastname": GraphQLVariable("lastname"), "fullname": GraphQLVariable("fullname"), "country": GraphQLVariable("country"), "location": GraphQLVariable("location"), "pictureAt": GraphQLVariable("pictureAt"), "status": GraphQLVariable("status"), "keepMedia": GraphQLVariable("keepMedia"), "networkPhoto": GraphQLVariable("networkPhoto"), "networkVideo": GraphQLVariable("networkVideo"), "networkAudio": GraphQLVariable("networkAudio"), "wallpaper": GraphQLVariable("wallpaper"), "loginMethod": GraphQLVariable("loginMethod"), "oneSignalId": GraphQLVariable("oneSignalId"), "lastActive": GraphQLVariable("lastActive"), "lastTerminate": GraphQLVariable("lastTerminate"), "createdAt": GraphQLVariable("createdAt"), "updatedAt": GraphQLVariable("updatedAt")], type: .nonNull(.object(UpdatePerson.selections))),
+      GraphQLField("updatePerson", arguments: ["objectId": GraphQLVariable("objectId"), "email": GraphQLVariable("email"), "phone": GraphQLVariable("phone"), "firstname": GraphQLVariable("firstname"), "lastname": GraphQLVariable("lastname"), "fullname": GraphQLVariable("fullname"), "country": GraphQLVariable("country"), "location": GraphQLVariable("location"), "pictureAt": GraphQLVariable("pictureAt"), "status": GraphQLVariable("status"), "keepMedia": GraphQLVariable("keepMedia"), "networkPhoto": GraphQLVariable("networkPhoto"), "networkVideo": GraphQLVariable("networkVideo"), "networkAudio": GraphQLVariable("networkAudio"), "wallpaper": GraphQLVariable("wallpaper"), "loginMethod": GraphQLVariable("loginMethod"), "oneSignalId": GraphQLVariable("oneSignalId"), "lastActive": GraphQLVariable("lastActive"), "lastTerminate": GraphQLVariable("lastTerminate"), "createdAt": GraphQLVariable("createdAt"), "updatedAt": GraphQLVariable("updatedAt")], type: .nonNull(.object(UpdatePerson.selections))),
     ]
 
     public private(set) var resultMap: ResultMap
@@ -760,6 +776,7 @@ public final class UpdatePersonMutation: GraphQLMutation {
 
       public static let selections: [GraphQLSelection] = [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("objectId", type: .nonNull(.scalar(String.self))),
         GraphQLField("email", type: .nonNull(.scalar(String.self))),
         GraphQLField("phone", type: .nonNull(.scalar(String.self))),
         GraphQLField("firstname", type: .nonNull(.scalar(String.self))),
@@ -788,8 +805,8 @@ public final class UpdatePersonMutation: GraphQLMutation {
         self.resultMap = unsafeResultMap
       }
 
-      public init(email: String, phone: String, firstname: String, lastname: String, fullname: String, country: String, location: String, pictureAt: Int, status: String, keepMedia: Int, networkPhoto: Int, networkVideo: Int, networkAudio: Int, wallpaper: String, loginMethod: String, oneSignalId: String, lastActive: Int, lastTerminate: Int, createdAt: Int, updatedAt: Int) {
-        self.init(unsafeResultMap: ["__typename": "Person", "email": email, "phone": phone, "firstname": firstname, "lastname": lastname, "fullname": fullname, "country": country, "location": location, "pictureAt": pictureAt, "status": status, "keepMedia": keepMedia, "networkPhoto": networkPhoto, "networkVideo": networkVideo, "networkAudio": networkAudio, "wallpaper": wallpaper, "loginMethod": loginMethod, "oneSignalId": oneSignalId, "lastActive": lastActive, "lastTerminate": lastTerminate, "createdAt": createdAt, "updatedAt": updatedAt])
+      public init(objectId: String, email: String, phone: String, firstname: String, lastname: String, fullname: String, country: String, location: String, pictureAt: Int, status: String, keepMedia: Int, networkPhoto: Int, networkVideo: Int, networkAudio: Int, wallpaper: String, loginMethod: String, oneSignalId: String, lastActive: Int, lastTerminate: Int, createdAt: Int, updatedAt: Int) {
+        self.init(unsafeResultMap: ["__typename": "Person", "objectId": objectId, "email": email, "phone": phone, "firstname": firstname, "lastname": lastname, "fullname": fullname, "country": country, "location": location, "pictureAt": pictureAt, "status": status, "keepMedia": keepMedia, "networkPhoto": networkPhoto, "networkVideo": networkVideo, "networkAudio": networkAudio, "wallpaper": wallpaper, "loginMethod": loginMethod, "oneSignalId": oneSignalId, "lastActive": lastActive, "lastTerminate": lastTerminate, "createdAt": createdAt, "updatedAt": updatedAt])
       }
 
       public var __typename: String {
@@ -798,6 +815,15 @@ public final class UpdatePersonMutation: GraphQLMutation {
         }
         set {
           resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var objectId: String {
+        get {
+          return resultMap["objectId"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "objectId")
         }
       }
 
@@ -3600,13 +3626,14 @@ public final class FriendsQuery: GraphQLQuery {
   }
 }
 
-public final class PeopleQuery: GraphQLQuery {
+public final class PersonsQuery: GraphQLQuery {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    query People($updatedAt: Int!) {
-      objects: people(updatedAt: $updatedAt) {
+    query Persons($updatedAt: Int!) {
+      objects: persons(updatedAt: $updatedAt) {
         __typename
+        objectId
         email
         phone
         firstname
@@ -3631,7 +3658,7 @@ public final class PeopleQuery: GraphQLQuery {
     }
     """
 
-  public let operationName: String = "People"
+  public let operationName: String = "Persons"
 
   public var updatedAt: Int
 
@@ -3647,7 +3674,7 @@ public final class PeopleQuery: GraphQLQuery {
     public static let possibleTypes: [String] = ["Query"]
 
     public static let selections: [GraphQLSelection] = [
-      GraphQLField("people", alias: "objects", arguments: ["updatedAt": GraphQLVariable("updatedAt")], type: .list(.object(Object.selections))),
+      GraphQLField("persons", alias: "objects", arguments: ["updatedAt": GraphQLVariable("updatedAt")], type: .list(.object(Object.selections))),
     ]
 
     public private(set) var resultMap: ResultMap
@@ -3674,6 +3701,7 @@ public final class PeopleQuery: GraphQLQuery {
 
       public static let selections: [GraphQLSelection] = [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("objectId", type: .nonNull(.scalar(String.self))),
         GraphQLField("email", type: .nonNull(.scalar(String.self))),
         GraphQLField("phone", type: .nonNull(.scalar(String.self))),
         GraphQLField("firstname", type: .nonNull(.scalar(String.self))),
@@ -3702,8 +3730,8 @@ public final class PeopleQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(email: String, phone: String, firstname: String, lastname: String, fullname: String, country: String, location: String, pictureAt: Int, status: String, keepMedia: Int, networkPhoto: Int, networkVideo: Int, networkAudio: Int, wallpaper: String, loginMethod: String, oneSignalId: String, lastActive: Int, lastTerminate: Int, createdAt: Int, updatedAt: Int) {
-        self.init(unsafeResultMap: ["__typename": "Person", "email": email, "phone": phone, "firstname": firstname, "lastname": lastname, "fullname": fullname, "country": country, "location": location, "pictureAt": pictureAt, "status": status, "keepMedia": keepMedia, "networkPhoto": networkPhoto, "networkVideo": networkVideo, "networkAudio": networkAudio, "wallpaper": wallpaper, "loginMethod": loginMethod, "oneSignalId": oneSignalId, "lastActive": lastActive, "lastTerminate": lastTerminate, "createdAt": createdAt, "updatedAt": updatedAt])
+      public init(objectId: String, email: String, phone: String, firstname: String, lastname: String, fullname: String, country: String, location: String, pictureAt: Int, status: String, keepMedia: Int, networkPhoto: Int, networkVideo: Int, networkAudio: Int, wallpaper: String, loginMethod: String, oneSignalId: String, lastActive: Int, lastTerminate: Int, createdAt: Int, updatedAt: Int) {
+        self.init(unsafeResultMap: ["__typename": "Person", "objectId": objectId, "email": email, "phone": phone, "firstname": firstname, "lastname": lastname, "fullname": fullname, "country": country, "location": location, "pictureAt": pictureAt, "status": status, "keepMedia": keepMedia, "networkPhoto": networkPhoto, "networkVideo": networkVideo, "networkAudio": networkAudio, "wallpaper": wallpaper, "loginMethod": loginMethod, "oneSignalId": oneSignalId, "lastActive": lastActive, "lastTerminate": lastTerminate, "createdAt": createdAt, "updatedAt": updatedAt])
       }
 
       public var __typename: String {
@@ -3712,6 +3740,15 @@ public final class PeopleQuery: GraphQLQuery {
         }
         set {
           resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var objectId: String {
+        get {
+          return resultMap["objectId"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "objectId")
         }
       }
 
@@ -5185,6 +5222,7 @@ public final class PersonSubscription: GraphQLSubscription {
     subscription Person($updatedAt: Int!) {
       object: person(updatedAt: $updatedAt) {
         __typename
+        objectId
         email
         phone
         firstname
@@ -5252,6 +5290,7 @@ public final class PersonSubscription: GraphQLSubscription {
 
       public static let selections: [GraphQLSelection] = [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("objectId", type: .nonNull(.scalar(String.self))),
         GraphQLField("email", type: .nonNull(.scalar(String.self))),
         GraphQLField("phone", type: .nonNull(.scalar(String.self))),
         GraphQLField("firstname", type: .nonNull(.scalar(String.self))),
@@ -5280,8 +5319,8 @@ public final class PersonSubscription: GraphQLSubscription {
         self.resultMap = unsafeResultMap
       }
 
-      public init(email: String, phone: String, firstname: String, lastname: String, fullname: String, country: String, location: String, pictureAt: Int, status: String, keepMedia: Int, networkPhoto: Int, networkVideo: Int, networkAudio: Int, wallpaper: String, loginMethod: String, oneSignalId: String, lastActive: Int, lastTerminate: Int, createdAt: Int, updatedAt: Int) {
-        self.init(unsafeResultMap: ["__typename": "Person", "email": email, "phone": phone, "firstname": firstname, "lastname": lastname, "fullname": fullname, "country": country, "location": location, "pictureAt": pictureAt, "status": status, "keepMedia": keepMedia, "networkPhoto": networkPhoto, "networkVideo": networkVideo, "networkAudio": networkAudio, "wallpaper": wallpaper, "loginMethod": loginMethod, "oneSignalId": oneSignalId, "lastActive": lastActive, "lastTerminate": lastTerminate, "createdAt": createdAt, "updatedAt": updatedAt])
+      public init(objectId: String, email: String, phone: String, firstname: String, lastname: String, fullname: String, country: String, location: String, pictureAt: Int, status: String, keepMedia: Int, networkPhoto: Int, networkVideo: Int, networkAudio: Int, wallpaper: String, loginMethod: String, oneSignalId: String, lastActive: Int, lastTerminate: Int, createdAt: Int, updatedAt: Int) {
+        self.init(unsafeResultMap: ["__typename": "Person", "objectId": objectId, "email": email, "phone": phone, "firstname": firstname, "lastname": lastname, "fullname": fullname, "country": country, "location": location, "pictureAt": pictureAt, "status": status, "keepMedia": keepMedia, "networkPhoto": networkPhoto, "networkVideo": networkVideo, "networkAudio": networkAudio, "wallpaper": wallpaper, "loginMethod": loginMethod, "oneSignalId": oneSignalId, "lastActive": lastActive, "lastTerminate": lastTerminate, "createdAt": createdAt, "updatedAt": updatedAt])
       }
 
       public var __typename: String {
@@ -5290,6 +5329,15 @@ public final class PersonSubscription: GraphQLSubscription {
         }
         set {
           resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var objectId: String {
+        get {
+          return resultMap["objectId"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "objectId")
         }
       }
 
