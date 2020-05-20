@@ -118,6 +118,3 @@ CREATE TABLE `Single` (
   `updatedAt` bigint(20) NOT NULL,
   PRIMARY KEY (`id`)
 );
-CREATE USER 'remote'@'%' IDENTIFIED BY 'Related123';
-GRANT ALL PRIVILEGES ON *.* TO 'remote'@'%' WITH GRANT OPTION;
-FLUSH PRIVILEGES;
