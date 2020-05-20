@@ -18,7 +18,7 @@ module.exports.createDetailSchema = function (gql) {
     }
 
     extend type Query {
-      details(chatId: String!): Detail
+      details(chatId: String!): [Detail]
     }
 
     extend type Mutation {

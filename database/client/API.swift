@@ -4081,7 +4081,7 @@ public final class DetailsQuery: GraphQLQuery {
     public static let possibleTypes: [String] = ["Query"]
 
     public static let selections: [GraphQLSelection] = [
-      GraphQLField("details", alias: "objects", arguments: ["chatId": GraphQLVariable("chatId")], type: .object(Object.selections)),
+      GraphQLField("details", alias: "objects", arguments: ["chatId": GraphQLVariable("chatId")], type: .list(.object(Object.selections))),
     ]
 
     public private(set) var resultMap: ResultMap
@@ -4090,16 +4090,16 @@ public final class DetailsQuery: GraphQLQuery {
       self.resultMap = unsafeResultMap
     }
 
-    public init(objects: Object? = nil) {
-      self.init(unsafeResultMap: ["__typename": "Query", "objects": objects.flatMap { (value: Object) -> ResultMap in value.resultMap }])
+    public init(objects: [Object?]? = nil) {
+      self.init(unsafeResultMap: ["__typename": "Query", "objects": objects.flatMap { (value: [Object?]) -> [ResultMap?] in value.map { (value: Object?) -> ResultMap? in value.flatMap { (value: Object) -> ResultMap in value.resultMap } } }])
     }
 
-    public var objects: Object? {
+    public var objects: [Object?]? {
       get {
-        return (resultMap["objects"] as? ResultMap).flatMap { Object(unsafeResultMap: $0) }
+        return (resultMap["objects"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Object?] in value.map { (value: ResultMap?) -> Object? in value.flatMap { (value: ResultMap) -> Object in Object(unsafeResultMap: value) } } }
       }
       set {
-        resultMap.updateValue(newValue?.resultMap, forKey: "objects")
+        resultMap.updateValue(newValue.flatMap { (value: [Object?]) -> [ResultMap?] in value.map { (value: Object?) -> ResultMap? in value.flatMap { (value: Object) -> ResultMap in value.resultMap } } }, forKey: "objects")
       }
     }
 
