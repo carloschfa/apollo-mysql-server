@@ -34,8 +34,8 @@ subscription Group($chatId: String!) {
 }
 
 ## Member
-subscription Member($chatId: String!) {
-  object: member(chatId: $chatId) {
+subscription Member($chatId: String, $userId: String) {
+  object: member(chatId: $chatId, userId: $userId) {
     objectId, chatId, userId, isActive, createdAt, updatedAt
   }
 }

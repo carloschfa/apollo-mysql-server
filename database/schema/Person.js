@@ -29,7 +29,7 @@ module.exports.createPersonSchema = function (gql) {
     }
 
     extend type Query {
-      persons(updatedAt: Int!): [Person]
+      persons(updatedAt: Int, userId: String): [Person]
     }
 
     extend type Mutation {
@@ -54,9 +54,27 @@ module.exports.createPersonResolver = function (database, Operation, withFilter,
     },
     Query: {
       persons: async(root, args) => {
-        let filter = { 
-          updatedAt: { 
-            [Operation.gt]: args.updatedAt
+        let filter  = { }
+        if (args.updatedAt) {
+          filter = { 
+            updatedAt: { 
+              [Operation.gt]: args.updatedAt
+            }
+          }
+        } else if (args.userId) {
+          filter = { 
+            userId: { 
+              [Operation.eq]: args.userId
+            }
+          }
+        } else if ((args.updatedAt) && (args.userId)) {
+          filter = { 
+            updatedAt: { 
+              [Operation.gt]: args.updatedAt
+            },
+            userId: { 
+              [Operation.eq]: args.userId
+            }
           }
         }
         return await database.models.Person.findAll({ where: filter });

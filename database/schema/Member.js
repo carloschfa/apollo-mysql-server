@@ -10,11 +10,11 @@ module.exports.createMemberSchema = function (gql) {
     }
 
     extend type Subscription {
-      member(chatId: String!): Member!
+      member(chatId: String, userId: String): Member!
     }
 
     extend type Query {
-      members(chatId: String, userIds: [String]): [Member]
+      members(chatId: String, userId: String): [Member]
     }
 
     extend type Mutation {
@@ -32,7 +32,13 @@ module.exports.createMemberResolver = function (database, Operation, withFilter,
       member: {
         subscribe: withFilter(
           () => pubsub.asyncIterator(MEMBER_CHANGE),
-          (payload, args) => args.chatId == payload.chatId
+          (payload, args) => {
+            if (args.chatId) {
+              return args.chatId === payload.chatId
+            } else if (args.userId) {
+              return args.userId === payload.userId
+            }
+          }
         )
       }
     },
@@ -45,10 +51,10 @@ module.exports.createMemberResolver = function (database, Operation, withFilter,
               [Operation.eq]: args.chatId
             }
           }
-        } else if (args.userIds) {
+        } else if (args.userId) {
           filter = { 
             userId: { 
-              [Operation.in]: args.userIds
+              [Operation.eq]: args.userId
             }
           }
         }

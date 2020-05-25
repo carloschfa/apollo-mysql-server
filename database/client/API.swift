@@ -3630,8 +3630,8 @@ public final class PersonsQuery: GraphQLQuery {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    query Persons($updatedAt: Int!) {
-      objects: persons(updatedAt: $updatedAt) {
+    query Persons($updatedAt: Int, $userId: String) {
+      objects: persons(updatedAt: $updatedAt, userId: $userId) {
         __typename
         objectId
         email
@@ -3660,21 +3660,23 @@ public final class PersonsQuery: GraphQLQuery {
 
   public let operationName: String = "Persons"
 
-  public var updatedAt: Int
+  public var updatedAt: Int?
+  public var userId: String?
 
-  public init(updatedAt: Int) {
+  public init(updatedAt: Int? = nil, userId: String? = nil) {
     self.updatedAt = updatedAt
+    self.userId = userId
   }
 
   public var variables: GraphQLMap? {
-    return ["updatedAt": updatedAt]
+    return ["updatedAt": updatedAt, "userId": userId]
   }
 
   public struct Data: GraphQLSelectionSet {
     public static let possibleTypes: [String] = ["Query"]
 
     public static let selections: [GraphQLSelection] = [
-      GraphQLField("persons", alias: "objects", arguments: ["updatedAt": GraphQLVariable("updatedAt")], type: .list(.object(Object.selections))),
+      GraphQLField("persons", alias: "objects", arguments: ["updatedAt": GraphQLVariable("updatedAt"), "userId": GraphQLVariable("userId")], type: .list(.object(Object.selections))),
     ]
 
     public private(set) var resultMap: ResultMap
@@ -4428,8 +4430,8 @@ public final class MembersQuery: GraphQLQuery {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    query Members($chatId: String, $userIds: [String]) {
-      objects: members(chatId: $chatId, userIds: $userIds) {
+    query Members($chatId: String, $userId: String) {
+      objects: members(chatId: $chatId, userId: $userId) {
         __typename
         objectId
         chatId
@@ -4444,22 +4446,22 @@ public final class MembersQuery: GraphQLQuery {
   public let operationName: String = "Members"
 
   public var chatId: String?
-  public var userIds: [String?]?
+  public var userId: String?
 
-  public init(chatId: String? = nil, userIds: [String?]? = nil) {
+  public init(chatId: String? = nil, userId: String? = nil) {
     self.chatId = chatId
-    self.userIds = userIds
+    self.userId = userId
   }
 
   public var variables: GraphQLMap? {
-    return ["chatId": chatId, "userIds": userIds]
+    return ["chatId": chatId, "userId": userId]
   }
 
   public struct Data: GraphQLSelectionSet {
     public static let possibleTypes: [String] = ["Query"]
 
     public static let selections: [GraphQLSelection] = [
-      GraphQLField("members", alias: "objects", arguments: ["chatId": GraphQLVariable("chatId"), "userIds": GraphQLVariable("userIds")], type: .list(.object(Object.selections))),
+      GraphQLField("members", alias: "objects", arguments: ["chatId": GraphQLVariable("chatId"), "userId": GraphQLVariable("userId")], type: .list(.object(Object.selections))),
     ]
 
     public private(set) var resultMap: ResultMap
@@ -6017,8 +6019,8 @@ public final class MemberSubscription: GraphQLSubscription {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    subscription Member($chatId: String!) {
-      object: member(chatId: $chatId) {
+    subscription Member($chatId: String, $userId: String) {
+      object: member(chatId: $chatId, userId: $userId) {
         __typename
         objectId
         chatId
@@ -6032,21 +6034,23 @@ public final class MemberSubscription: GraphQLSubscription {
 
   public let operationName: String = "Member"
 
-  public var chatId: String
+  public var chatId: String?
+  public var userId: String?
 
-  public init(chatId: String) {
+  public init(chatId: String? = nil, userId: String? = nil) {
     self.chatId = chatId
+    self.userId = userId
   }
 
   public var variables: GraphQLMap? {
-    return ["chatId": chatId]
+    return ["chatId": chatId, "userId": userId]
   }
 
   public struct Data: GraphQLSelectionSet {
     public static let possibleTypes: [String] = ["Subscription"]
 
     public static let selections: [GraphQLSelection] = [
-      GraphQLField("member", alias: "object", arguments: ["chatId": GraphQLVariable("chatId")], type: .nonNull(.object(Object.selections))),
+      GraphQLField("member", alias: "object", arguments: ["chatId": GraphQLVariable("chatId"), "userId": GraphQLVariable("userId")], type: .nonNull(.object(Object.selections))),
     ]
 
     public private(set) var resultMap: ResultMap

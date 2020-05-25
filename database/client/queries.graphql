@@ -6,8 +6,8 @@ query Friends($userId: String!) {
 }
 
 ## Person
-query Persons($updatedAt: Int!) {
-  objects: persons(updatedAt: $updatedAt) {
+query Persons($updatedAt: Int, $userId: String) {
+  objects: persons(updatedAt: $updatedAt, userId: $userId) {
     objectId, email, phone, firstname, lastname, fullname, country, location, pictureAt, status, keepMedia, networkPhoto, networkVideo, networkAudio, wallpaper, loginMethod, oneSignalId, lastActive, lastTerminate, createdAt, updatedAt
   }  
 }
@@ -34,8 +34,8 @@ query Groups($chatId: String!) {
 }
 
 ## Member
-query Members($chatId: String, $userIds: [String] ) {
-  objects: members(chatId: $chatId, userIds: $userIds) {
+query Members($chatId: String, $userId: String) {
+  objects: members(chatId: $chatId, userId: $userId) {
     objectId, chatId, userId, isActive, createdAt, updatedAt
   }
 }
