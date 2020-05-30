@@ -29,7 +29,7 @@ module.exports.createPersonSchema = function (gql) {
     }
 
     extend type Query {
-      persons(updatedAt: Int, userId: String): [Person]
+      persons(updatedAt: Int, objectId: String): [Person]
     }
 
     extend type Mutation {
@@ -61,19 +61,19 @@ module.exports.createPersonResolver = function (database, Operation, withFilter,
               [Operation.gt]: args.updatedAt
             }
           }
-        } else if (args.userId) {
+        } else if (args.objectId) {
           filter = { 
-            userId: { 
-              [Operation.eq]: args.userId
+            objectId: { 
+              [Operation.eq]: args.objectId
             }
           }
-        } else if ((args.updatedAt) && (args.userId)) {
+        } else if ((args.updatedAt) && (args.objectId)) {
           filter = { 
             updatedAt: { 
               [Operation.gt]: args.updatedAt
             },
-            userId: { 
-              [Operation.eq]: args.userId
+            objectId: {
+              [Operation.eq]: args.objectId
             }
           }
         }

@@ -61,7 +61,7 @@
                 "defaultValue": null
               },
               {
-                "name": "userId",
+                "name": "objectId",
                 "description": "",
                 "type": {
                   "kind": "SCALAR",

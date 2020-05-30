@@ -3630,8 +3630,8 @@ public final class PersonsQuery: GraphQLQuery {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    query Persons($updatedAt: Int, $userId: String) {
-      objects: persons(updatedAt: $updatedAt, userId: $userId) {
+    query Persons($updatedAt: Int, $objectId: String) {
+      objects: persons(updatedAt: $updatedAt, objectId: $objectId) {
         __typename
         objectId
         email
@@ -3661,22 +3661,22 @@ public final class PersonsQuery: GraphQLQuery {
   public let operationName: String = "Persons"
 
   public var updatedAt: Int?
-  public var userId: String?
+  public var objectId: String?
 
-  public init(updatedAt: Int? = nil, userId: String? = nil) {
+  public init(updatedAt: Int? = nil, objectId: String? = nil) {
     self.updatedAt = updatedAt
-    self.userId = userId
+    self.objectId = objectId
   }
 
   public var variables: GraphQLMap? {
-    return ["updatedAt": updatedAt, "userId": userId]
+    return ["updatedAt": updatedAt, "objectId": objectId]
   }
 
   public struct Data: GraphQLSelectionSet {
     public static let possibleTypes: [String] = ["Query"]
 
     public static let selections: [GraphQLSelection] = [
-      GraphQLField("persons", alias: "objects", arguments: ["updatedAt": GraphQLVariable("updatedAt"), "userId": GraphQLVariable("userId")], type: .list(.object(Object.selections))),
+      GraphQLField("persons", alias: "objects", arguments: ["updatedAt": GraphQLVariable("updatedAt"), "objectId": GraphQLVariable("objectId")], type: .list(.object(Object.selections))),
     ]
 
     public private(set) var resultMap: ResultMap

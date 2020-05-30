@@ -66,6 +66,7 @@ module.exports.createMemberResolver = function (database, Operation, withFilter,
         let member = await database.models.Member.create(args);
         pubsub.publish(MEMBER_CHANGE, {
           chatId: args.chatId,
+          userId: args.userId,
           member: member.dataValues 
         });
         return member;
@@ -83,6 +84,7 @@ module.exports.createMemberResolver = function (database, Operation, withFilter,
           .then(() => {
             pubsub.publish(MEMBER_CHANGE, {
               chatId: args.chatId,
+              userId: args.userId,
               member: args
             });
           })
